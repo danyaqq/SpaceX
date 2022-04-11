@@ -12,4 +12,7 @@ struct SpaceRocketsViewCellViewModel {
     let image: String
     let title: String
     let characteristics: [CharacteristicsViewModel]
+    let firstStage: [InfoCellViewModel]
+    let secondStage: [InfoCellViewModel]
+    let launchItems: [RocketLaunchViewModel]
 }
