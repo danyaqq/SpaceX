@@ -9,9 +9,16 @@ import Foundation
 import SDWebImage
 import UIKit
 
+protocol SpaceRocketsViewCellDelegate: AnyObject {
+    func settingsButtonDidTap()
+    func showLaunchesButtonDidTap()
+}
+
 class SpaceRocketsViewCell: UICollectionViewCell {
     
     static let identifier = "SpaceRocketsViewCell"
+    
+    weak var delegate: SpaceRocketsViewCellDelegate?
     
     private lazy var myScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -35,7 +42,7 @@ class SpaceRocketsViewCell: UICollectionViewCell {
     }()
     
     private let titleRocketView: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = .systemFont(ofSize: 24)
         label.textColor = .white
         return label
@@ -45,6 +52,7 @@ class SpaceRocketsViewCell: UICollectionViewCell {
         let button = UIButton()
         let image = UIImage(named: "settings")
         button.setImage(image?.withTintColor(#colorLiteral(red: 0.7920895219, green: 0.792201519, blue: 0.7920541167, alpha: 1), renderingMode: .automatic), for: .normal)
+        button.addTarget(nil, action: #selector(settingsButtonDidTap), for: .touchUpInside)
         button.clipsToBounds = true
         return button
     }()
@@ -62,6 +70,24 @@ class SpaceRocketsViewCell: UICollectionViewCell {
         stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
+    }()
+    
+    private lazy var infoView: InfoView = {
+        let view = InfoView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let showButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Посмотреть запуски", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        button.backgroundColor = #colorLiteral(red: 0.1293970644, green: 0.1294214725, blue: 0.1293893754, alpha: 1)
+        button.layer.masksToBounds = true
+        button.addTarget(nil, action: #selector(showLaunchesButtonDidTap), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private lazy var stackView: UIStackView = {
@@ -83,6 +109,15 @@ class SpaceRocketsViewCell: UICollectionViewCell {
         fatalError()
     }
     
+    @objc
+    func settingsButtonDidTap() {
+        delegate?.settingsButtonDidTap()
+    }
+    
+    @objc
+    func showLaunchesButtonDidTap(){
+        delegate?.showLaunchesButtonDidTap()
+    }
 }
 
 extension SpaceRocketsViewCell {
@@ -94,7 +129,11 @@ extension SpaceRocketsViewCell {
         
         containerView.addSubview(topStackView)
         containerView.addSubview(characteristicsView)
+        containerView.addSubview(infoView)
+        containerView.addSubview(showButton)
+        
         containerView.layer.cornerRadius = 32
+        showButton.layer.cornerRadius = 12
     }
     
     func setupConstraints() {
@@ -113,7 +152,7 @@ extension SpaceRocketsViewCell {
         
         containerView.topAnchor.constraint(equalTo: rocketImageView.bottomAnchor, constant: -20).isActive = true
         containerView.widthAnchor.constraint(equalToConstant: contentView.frame.width).isActive = true
-        containerView.heightAnchor.constraint(equalToConstant: contentView.frame.height).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: myScrollView.bottomAnchor).isActive = true
         
         topStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32).isActive = true
         topStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32).isActive = true
@@ -123,6 +162,17 @@ extension SpaceRocketsViewCell {
         characteristicsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         characteristicsView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 32).isActive = true
         characteristicsView.heightAnchor.constraint(equalToConstant: 96).isActive = true
+        
+        infoView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32).isActive = true
+        infoView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32).isActive = true
+        infoView.topAnchor.constraint(equalTo: characteristicsView.bottomAnchor, constant: 16).isActive = true
+        infoView.bottomAnchor.constraint(equalTo: showButton.topAnchor, constant: -20).isActive = true
+        infoView.heightAnchor.constraint(equalToConstant: 468).isActive = true
+        
+        showButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32).isActive = true
+        showButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32).isActive = true
+        showButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -56).isActive = true
+        showButton.heightAnchor.constraint(equalToConstant: 56).isActive = true
     }
     
     func configure(with viewModel: SpaceRocketsViewCellViewModel) {
@@ -132,5 +182,13 @@ extension SpaceRocketsViewCell {
     
     func configureCharacteristicsView(with viewModels: [CharacteristicsViewModel]) {
         characteristicsView.items = viewModels
+    }
+    
+    func configureInfoView(firstStageViewModel: [InfoCellViewModel],
+                           secondStageViewModel: [InfoCellViewModel],
+                           launchItemsViewModel: [RocketLaunchViewModel]) {
+        infoView.firstStage = firstStageViewModel
+        infoView.secondStage = secondStageViewModel
+        infoView.launchItems = launchItemsViewModel
     }
 }

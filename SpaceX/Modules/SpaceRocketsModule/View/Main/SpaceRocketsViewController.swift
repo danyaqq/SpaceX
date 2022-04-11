@@ -108,16 +108,15 @@ extension SpaceRocketsViewController: UICollectionViewDelegate, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpaceRocketsViewCell.identifier, for: indexPath) as? SpaceRocketsViewCell else {
             return UICollectionViewCell()
         }
-        if let rocket = presenter.rockets?[indexPath.item]{
-            let viewModel = SpaceRocketsViewCellViewModel(image: rocket.flickrImages.first ?? "", title: rocket.name, characteristics: [
-                CharacteristicsViewModel(title: "Высота, ft", value: "\(rocket.height.feet ?? 0)"),
-                CharacteristicsViewModel(title: "Диаметр, ft", value: "\(rocket.diameter.feet ?? 0)"),
-                CharacteristicsViewModel(title: "Масса, lb", value: "\(rocket.mass.lb)"),
-                CharacteristicsViewModel(title: "Нагрузка, lb", value: "\(rocket.payloadWeights.first(where: { $0.id == "leo"})?.lb ?? 0)")
-            ])
-            cell.configure(with: viewModel)
-            cell.configureCharacteristicsView(with: viewModel.characteristics)
+        
+        if let viewModel = presenter.getViewModel(index: indexPath.row) {
+        cell.configure(with: viewModel)
+        cell.configureCharacteristicsView(with: viewModel.characteristics)
+        cell.configureInfoView(firstStageViewModel: viewModel.firstStage, secondStageViewModel: viewModel.secondStage, launchItemsViewModel: viewModel.launchItems)
         }
+        
+        cell.delegate = self
+        
         return cell
     }
 }
@@ -132,5 +131,17 @@ extension SpaceRocketsViewController: SpaceRocketsViewControllerProtocol {
         let alert = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension SpaceRocketsViewController: SpaceRocketsViewCellDelegate {
+    func settingsButtonDidTap() {
+        let settingsVC = AssemblyModuleBuilder.createSettingsModule()
+        settingsVC.modalPresentationStyle = .formSheet
+        navigationController?.present(settingsVC, animated: true, completion: nil)
+    }
+    
+    func showLaunchesButtonDidTap() {
+        print("Tap")
     }
 }
