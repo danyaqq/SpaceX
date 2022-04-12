@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		371F87432806205F00E687B0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371F87422806205F00E687B0 /* DetailViewController.swift */; };
+		371F87452806206A00E687B0 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371F87442806206A00E687B0 /* DetailPresenter.swift */; };
+		371F8749280636BC00E687B0 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371F8748280636BC00E687B0 /* DetailTableViewCell.swift */; };
 		3728F57A28041C9A00B158F2 /* CharacteristicsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728F57928041C9A00B158F2 /* CharacteristicsViewCell.swift */; };
 		3728F57C28042E8E00B158F2 /* CharacteristicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728F57B28042E8E00B158F2 /* CharacteristicsViewModel.swift */; };
 		3728F57E28043E8600B158F2 /* CharacteristicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728F57D28043E8600B158F2 /* CharacteristicsView.swift */; };
@@ -36,6 +39,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		371F87422806205F00E687B0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		371F87442806206A00E687B0 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		371F8748280636BC00E687B0 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		3728F57928041C9A00B158F2 /* CharacteristicsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsViewCell.swift; sourceTree = "<group>"; };
 		3728F57B28042E8E00B158F2 /* CharacteristicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsViewModel.swift; sourceTree = "<group>"; };
 		3728F57D28043E8600B158F2 /* CharacteristicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsView.swift; sourceTree = "<group>"; };
@@ -77,6 +83,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		371F87412806204E00E687B0 /* DetailModule */ = {
+			isa = PBXGroup;
+			children = (
+				371F87472806369A00E687B0 /* View */,
+				371F87442806206A00E687B0 /* DetailPresenter.swift */,
+			);
+			path = DetailModule;
+			sourceTree = "<group>";
+		};
+		371F87462806368000E687B0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				371F8748280636BC00E687B0 /* DetailTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		371F87472806369A00E687B0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				371F87422806205F00E687B0 /* DetailViewController.swift */,
+				371F87462806368000E687B0 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		3728F5732804193700B158F2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +315,7 @@
 		37B7321728033D9C00C5B4D9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				371F87412806204E00E687B0 /* DetailModule */,
 				3728F5922804E38B00B158F2 /* SettingsModule */,
 				37B7321828033DA300C5B4D9 /* SpaceRocketsModule */,
 			);
@@ -394,6 +427,7 @@
 				3728F57A28041C9A00B158F2 /* CharacteristicsViewCell.swift in Sources */,
 				37B7320328033CD200C5B4D9 /* AppDelegate.swift in Sources */,
 				3728F58428046A2A00B158F2 /* InfoTableViewCell.swift in Sources */,
+				371F87452806206A00E687B0 /* DetailPresenter.swift in Sources */,
 				3728F59D2805D8BD00B158F2 /* ChoosingUnitView.swift in Sources */,
 				3728F58C2804D9B800B158F2 /* RocketLaunchViewCell.swift in Sources */,
 				3728F58228045B7300B158F2 /* InfoView.swift in Sources */,
@@ -401,6 +435,8 @@
 				377ADD932803652100D6C77A /* SpaceRocketsViewCellViewModel.swift in Sources */,
 				3728F5872804D76600B158F2 /* InfoCellViewModel.swift in Sources */,
 				3728F59B2805CD5000B158F2 /* SegmentedControl.swift in Sources */,
+				371F8749280636BC00E687B0 /* DetailTableViewCell.swift in Sources */,
+				371F87432806205F00E687B0 /* DetailViewController.swift in Sources */,
 				377ADD9828036A6700D6C77A /* UIView + RoundCorner.swift in Sources */,
 				3728F57E28043E8600B158F2 /* CharacteristicsView.swift in Sources */,
 				377ADD842803409F00D6C77A /* Rocket.swift in Sources */,

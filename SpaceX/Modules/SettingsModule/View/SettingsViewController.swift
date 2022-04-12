@@ -13,7 +13,7 @@ protocol SettingsViewControllerProtocol: AnyObject {
 
 class SettingsViewController: UIViewController {
     
-    var presenter: SettingsPresenterProtocol?
+    var presenter: SettingsPresenterProtocol!
     
     private lazy var topView: UIView = {
         let view = UIView()

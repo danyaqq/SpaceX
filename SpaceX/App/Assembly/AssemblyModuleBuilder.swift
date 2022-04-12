@@ -11,6 +11,7 @@ import UIKit
 protocol AssemblyModuleBuilderProtocol {
     static func createSpaceRocetsModule() -> UIViewController
     static func createSettingsModule() -> UIViewController
+    static func createDetailModule(with titleText: String?) -> UIViewController
 }
 
 final class AssemblyModuleBuilder: AssemblyModuleBuilderProtocol {
@@ -26,6 +27,15 @@ final class AssemblyModuleBuilder: AssemblyModuleBuilderProtocol {
     static func createSettingsModule() -> UIViewController {
         let view = SettingsViewController()
         let presenter = SettingsPresenter(view: view)
+        view.presenter = presenter
+        
+        return view
+    }
+    
+    static func createDetailModule(with titleText: String?) -> UIViewController {
+        let view = DetailViewController()
+        let networkService = NetworkService()
+        let presenter = DetailPresenter(view: view, networkService: networkService, titleText: titleText)
         view.presenter = presenter
         
         return view

@@ -11,7 +11,7 @@ import UIKit
 
 protocol SpaceRocketsViewCellDelegate: AnyObject {
     func settingsButtonDidTap()
-    func showLaunchesButtonDidTap()
+    func showLaunchesButtonDidTap(with titleText: String?)
 }
 
 class SpaceRocketsViewCell: UICollectionViewCell {
@@ -19,6 +19,8 @@ class SpaceRocketsViewCell: UICollectionViewCell {
     static let identifier = "SpaceRocketsViewCell"
     
     weak var delegate: SpaceRocketsViewCellDelegate?
+    
+    var titleText: String?
     
     private lazy var myScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -116,7 +118,7 @@ class SpaceRocketsViewCell: UICollectionViewCell {
     
     @objc
     func showLaunchesButtonDidTap(){
-        delegate?.showLaunchesButtonDidTap()
+        delegate?.showLaunchesButtonDidTap(with: titleText)
     }
 }
 

@@ -45,7 +45,6 @@ extension RocketLaunchViewCell {
     func setupView() {
         addSubview(titleLabel)
         addSubview(descriptionLabel)
-        
         backgroundColor = .black
     }
     
