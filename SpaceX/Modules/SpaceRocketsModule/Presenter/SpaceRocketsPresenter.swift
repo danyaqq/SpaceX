@@ -15,7 +15,7 @@ protocol SpaceRocketsPresenterProtocol: AnyObject {
 }
 
 class SpaceRocketsPresenter: SpaceRocketsPresenterProtocol {
-
+    
     //Properties
     weak var view: SpaceRocketsViewControllerProtocol?
     let networkService: NetworkServiceProtocol?
@@ -53,25 +53,31 @@ class SpaceRocketsPresenter: SpaceRocketsPresenterProtocol {
         guard let rocket = rockets?[index] else {
             return nil
         }
-        
-        return SpaceRocketsViewCellViewModel(image: rocket.flickrImages.first ?? "", title: rocket.name, characteristics: [
-            CharacteristicsViewModel(title: "Высота, ft", value: "\(rocket.height.feet ?? 0)"),
-            CharacteristicsViewModel(title: "Диаметр, ft", value: "\(rocket.diameter.feet ?? 0)"),
-            CharacteristicsViewModel(title: "Масса, lb", value: "\(rocket.mass.lb)"),
-            CharacteristicsViewModel(title: "Нагрузка, lb", value: "\(rocket.payloadWeights.first(where: { $0.id == "leo"})?.lb ?? 0)")
-        ], firstStage: [
-            InfoCellViewModel(title: "Количество двигателей", value: "\(rocket.firstStage.engines)", unit: ""),
-            InfoCellViewModel(title: "Количество топлива", value: "\(rocket.firstStage.fuelAmountTons)", unit: "ton"),
-            InfoCellViewModel(title: "Время сгорания", value: "\(rocket.firstStage.burnTimeSEC ?? 0)", unit: "sec")
-        ], secondStage: [
-            InfoCellViewModel(title: "Количество двигателей", value: "\(rocket.secondStage.engines)", unit: ""),
-            InfoCellViewModel(title: "Количество топлива", value: "\(rocket.secondStage.fuelAmountTons)", unit: "ton"),
-            InfoCellViewModel(title: "Время сгорания", value: "\(rocket.secondStage.burnTimeSEC ?? 0)", unit: "sec")
-        ], launchItems: [
-            RocketLaunchViewModel(title: "Первый запуск", value: "\(rocket.firstFlight.getFormattedDateString(format: "d MMMM, yyyy"))"),
-            RocketLaunchViewModel(title: "Страна", value: "\(rocket.country)"),
-            RocketLaunchViewModel(title: "Стоимость запуска", value: "$\(rocket.costPerLaunch / 1000000) млн")
-        ])
+        let viewModel = SpaceRocketsViewCellViewModel(
+            image: rocket.flickrImages.first ?? "",
+            title: rocket.name, characteristics: [
+                CharacteristicsViewModel(title: "Высота, ft", value: "\(rocket.height.feet ?? 0)"),
+                CharacteristicsViewModel(title: "Диаметр, ft", value: "\(rocket.diameter.feet ?? 0)"),
+                CharacteristicsViewModel(title: "Масса, lb", value: "\(rocket.mass.lb)"),
+                CharacteristicsViewModel(title: "Нагрузка, lb", value: "\(rocket.payloadWeights.first(where: { $0.id == "leo"})?.lb ?? 0)")
+            ],
+            firstStage: [
+                InfoCellViewModel(title: "Количество двигателей", value: "\(rocket.firstStage.engines)", unit: ""),
+                InfoCellViewModel(title: "Количество топлива", value: "\(rocket.firstStage.fuelAmountTons)", unit: "ton"),
+                InfoCellViewModel(title: "Время сгорания", value: "\(rocket.firstStage.burnTimeSEC ?? 0)", unit: "sec")
+            ],
+            secondStage: [
+                InfoCellViewModel(title: "Количество двигателей", value: "\(rocket.secondStage.engines)", unit: ""),
+                InfoCellViewModel(title: "Количество топлива", value: "\(rocket.secondStage.fuelAmountTons)", unit: "ton"),
+                InfoCellViewModel(title: "Время сгорания", value: "\(rocket.secondStage.burnTimeSEC ?? 0)", unit: "sec")
+            ],
+            launchItems: [
+                RocketLaunchViewModel(title: "Первый запуск", value: "\(rocket.firstFlight.getFormattedDateString(format: "d MMMM, yyyy"))"),
+                RocketLaunchViewModel(title: "Страна", value: "\(rocket.country)"),
+                RocketLaunchViewModel(title: "Стоимость запуска", value: "$\(rocket.costPerLaunch / 1000000) млн")
+            ]
+        )
+        return viewModel
     }
     
 }
