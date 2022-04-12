@@ -9,6 +9,7 @@ import Foundation
 
 protocol SettingsPresenterProtocol: AnyObject {
     init(view: SettingsViewControllerProtocol)
+    func dismissSettings()
 }
 
 class SettingsPresenter: SettingsPresenterProtocol {
@@ -17,5 +18,9 @@ class SettingsPresenter: SettingsPresenterProtocol {
     
     required init(view: SettingsViewControllerProtocol) {
         self.view = view
+    }
+    
+    func dismissSettings() {
+        view?.closeButtonDidTapped()
     }
 }
