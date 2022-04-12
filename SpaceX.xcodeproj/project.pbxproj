@@ -18,6 +18,8 @@
 		3728F5912804E07100B158F2 /* String + DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728F5902804E07100B158F2 /* String + DateFormatter.swift */; };
 		3728F5962804E6BD00B158F2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728F5952804E6BD00B158F2 /* SettingsViewController.swift */; };
 		3728F5982804E6D500B158F2 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728F5972804E6D500B158F2 /* SettingsPresenter.swift */; };
+		3728F59B2805CD5000B158F2 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728F59A2805CD5000B158F2 /* SegmentedControl.swift */; };
+		3728F59D2805D8BD00B158F2 /* ChoosingUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3728F59C2805D8BD00B158F2 /* ChoosingUnitView.swift */; };
 		377ADD812803402400D6C77A /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377ADD802803402400D6C77A /* NetworkServices.swift */; };
 		377ADD842803409F00D6C77A /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377ADD832803409F00D6C77A /* Rocket.swift */; };
 		377ADD8E280350DC00D6C77A /* SpaceRocketsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377ADD8D280350DC00D6C77A /* SpaceRocketsViewCell.swift */; };
@@ -45,6 +47,8 @@
 		3728F5902804E07100B158F2 /* String + DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + DateFormatter.swift"; sourceTree = "<group>"; };
 		3728F5952804E6BD00B158F2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3728F5972804E6D500B158F2 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		3728F59A2805CD5000B158F2 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		3728F59C2805D8BD00B158F2 /* ChoosingUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosingUnitView.swift; sourceTree = "<group>"; };
 		377ADD802803402400D6C77A /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
 		377ADD832803409F00D6C77A /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
 		377ADD8D280350DC00D6C77A /* SpaceRocketsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceRocketsViewCell.swift; sourceTree = "<group>"; };
@@ -184,8 +188,17 @@
 			isa = PBXGroup;
 			children = (
 				3728F5952804E6BD00B158F2 /* SettingsViewController.swift */,
+				3728F59C2805D8BD00B158F2 /* ChoosingUnitView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		3728F59E2805E0D900B158F2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3728F59A2805CD5000B158F2 /* SegmentedControl.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		377ADD7F2803401900D6C77A /* Services */ = {
@@ -289,6 +302,7 @@
 		37B7321928033DE300C5B4D9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3728F59E2805E0D900B158F2 /* Views */,
 				37B7321028033CD500C5B4D9 /* Info.plist */,
 				37B7320D28033CD500C5B4D9 /* LaunchScreen.storyboard */,
 				37B7320B28033CD500C5B4D9 /* Assets.xcassets */,
@@ -380,11 +394,13 @@
 				3728F57A28041C9A00B158F2 /* CharacteristicsViewCell.swift in Sources */,
 				37B7320328033CD200C5B4D9 /* AppDelegate.swift in Sources */,
 				3728F58428046A2A00B158F2 /* InfoTableViewCell.swift in Sources */,
+				3728F59D2805D8BD00B158F2 /* ChoosingUnitView.swift in Sources */,
 				3728F58C2804D9B800B158F2 /* RocketLaunchViewCell.swift in Sources */,
 				3728F58228045B7300B158F2 /* InfoView.swift in Sources */,
 				377ADD8E280350DC00D6C77A /* SpaceRocketsViewCell.swift in Sources */,
 				377ADD932803652100D6C77A /* SpaceRocketsViewCellViewModel.swift in Sources */,
 				3728F5872804D76600B158F2 /* InfoCellViewModel.swift in Sources */,
+				3728F59B2805CD5000B158F2 /* SegmentedControl.swift in Sources */,
 				377ADD9828036A6700D6C77A /* UIView + RoundCorner.swift in Sources */,
 				3728F57E28043E8600B158F2 /* CharacteristicsView.swift in Sources */,
 				377ADD842803409F00D6C77A /* Rocket.swift in Sources */,

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SettingsViewControllerProtocol: AnyObject {
-    
+    func closeButtonDidTapped()
 }
 
 class SettingsViewController: UIViewController {
@@ -35,8 +35,54 @@ class SettingsViewController: UIViewController {
         button.setTitle("Закрыть", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        button.addTarget(nil, action: #selector(closeButtonDidTap), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private let heightSegmentView: ChoosingUnitView = {
+       let view = ChoosingUnitView()
+        view.title = "Высота"
+        view.segmentedItems = ["m", "ft"]
+        view.selectedItemIndex = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let diameterSegmentView: ChoosingUnitView = {
+       let view = ChoosingUnitView()
+        view.title = "Диаметр"
+        view.segmentedItems = ["m", "ft"]
+        view.selectedItemIndex = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let weightSegmentView: ChoosingUnitView = {
+       let view = ChoosingUnitView()
+        view.title = "Масса"
+        view.segmentedItems = ["kg", "lb"]
+        view.selectedItemIndex = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let payloadSegmentView: ChoosingUnitView = {
+       let view = ChoosingUnitView()
+        view.title = "Полезная нагрузка"
+        view.segmentedItems = ["kg", "lb"]
+        view.selectedItemIndex = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var stackView: UIStackView = {
+       let stack = UIStackView(arrangedSubviews: [heightSegmentView, diameterSegmentView, weightSegmentView, payloadSegmentView])
+        stack.axis = .vertical
+        stack.spacing = 27
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
     override func viewDidLoad() {
@@ -46,12 +92,18 @@ class SettingsViewController: UIViewController {
         setupConstraints()
     }
     
+    @objc
+    func closeButtonDidTap() {
+        presenter?.dismissSettings()
+    }
+    
 }
 
 extension SettingsViewController {
     func setupView() {
         view.backgroundColor = UIColor(named: "pageBlack")
         view.addSubview(topView)
+        view.addSubview(stackView)
         
         topView.addSubview(settingsLabel)
         topView.addSubview(closeButton)
@@ -68,11 +120,17 @@ extension SettingsViewController {
             settingsLabel.centerYAnchor.constraint(equalTo: topView.centerYAnchor),
             
             closeButton.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -24),
-            closeButton.centerYAnchor.constraint(equalTo: topView.centerYAnchor)
+            closeButton.centerYAnchor.constraint(equalTo: topView.centerYAnchor),
+            
+            stackView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 56),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 28),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -28)
         ])
     }
 }
 
 extension SettingsViewController: SettingsViewControllerProtocol {
-    
+    func closeButtonDidTapped() {
+        dismiss(animated: true, completion: nil)
+    }
 }
