@@ -83,10 +83,17 @@ extension DetailCollectionViewCell {
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             leftStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
+            leftStackView.trailingAnchor.constraint(equalTo: rocketImageView.leadingAnchor, constant: -8),
             leftStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             
             rocketImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
             rocketImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
+    }
+    
+    func configure(with viewModel: DetailCellViewModel) {
+        titleLabel.text = viewModel.name
+        dateLabel.text = viewModel.date
+        rocketImageView.image = UIImage(named: viewModel.image)
     }
 }

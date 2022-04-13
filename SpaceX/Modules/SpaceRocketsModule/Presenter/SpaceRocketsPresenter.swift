@@ -54,6 +54,7 @@ class SpaceRocketsPresenter: SpaceRocketsPresenterProtocol {
             return nil
         }
         let viewModel = SpaceRocketsViewCellViewModel(
+            id: rocket.id,
             image: rocket.flickrImages.first ?? "",
             title: rocket.name, characteristics: [
                 CharacteristicsViewModel(title: "Высота, ft", value: "\(rocket.height.feet ?? 0)"),
@@ -72,7 +73,7 @@ class SpaceRocketsPresenter: SpaceRocketsPresenterProtocol {
                 InfoCellViewModel(title: "Время сгорания", value: "\(rocket.secondStage.burnTimeSEC ?? 0)", unit: "sec")
             ],
             launchItems: [
-                RocketLaunchViewModel(title: "Первый запуск", value: "\(rocket.firstFlight.getFormattedDateString(format: "d MMMM, yyyy"))"),
+                RocketLaunchViewModel(title: "Первый запуск", value: "\(rocket.firstFlight.getFormattedDateString(oldFormat: "yyyy-MM-dd", format: "d MMMM, yyyy"))"),
                 RocketLaunchViewModel(title: "Страна", value: "\(rocket.country)"),
                 RocketLaunchViewModel(title: "Стоимость запуска", value: "$\(rocket.costPerLaunch / 1000000) млн")
             ]

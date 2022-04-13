@@ -110,6 +110,7 @@ extension SpaceRocketsViewController: UICollectionViewDelegate, UICollectionView
         
         if let viewModel = presenter.getViewModel(index: indexPath.row) {
             cell.titleText = viewModel.title
+            cell.rocketId = viewModel.id
             cell.configure(with: viewModel)
             cell.configureCharacteristicsView(with: viewModel.characteristics)
             cell.configureInfoView(firstStageViewModel: viewModel.firstStage, secondStageViewModel: viewModel.secondStage, launchItemsViewModel: viewModel.launchItems)
@@ -142,8 +143,8 @@ extension SpaceRocketsViewController: SpaceRocketsViewCellDelegate {
         navigationController?.present(settingsVC, animated: true, completion: nil)
     }
     
-    func showLaunchesButtonDidTap(with titleText: String?) {
-        let detailVC = AssemblyModuleBuilder.createDetailModule(with: titleText)
+    func showLaunchesButtonDidTap(with titleText: String?, rocketId: String?) {
+        let detailVC = AssemblyModuleBuilder.createDetailModule(with: titleText, rocketId: rocketId)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

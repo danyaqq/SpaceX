@@ -8,9 +8,9 @@
 import Foundation
 
 extension String {
-    func getFormattedDateString(format: String) -> String {
+    func getFormattedDateString(oldFormat: String, format: String) -> String {
         let stringDateFormatter = DateFormatter()
-        stringDateFormatter.dateFormat = "yyyy-MM-dd"
+        stringDateFormatter.dateFormat = oldFormat
         let date = stringDateFormatter.date(from: self)
         
         let dateFormatter = DateFormatter()

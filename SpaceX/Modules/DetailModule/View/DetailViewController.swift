@@ -8,7 +8,8 @@
 import UIKit
 
 protocol DetailViewControllerProtocol: AnyObject {
-    
+    func success()
+    func failure(error: Error)
 }
 
 class DetailViewController: UIViewController {
@@ -71,12 +72,15 @@ extension DetailViewController {
 
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 18
+        return presenter.launches?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCollectionViewCell.identifier, for: indexPath) as? DetailCollectionViewCell else {
             return UICollectionViewCell()
+        }
+        if let viewModel = presenter.getViewModel(index: indexPath.row) {
+        cell.configure(with: viewModel)
         }
         return cell
     }
@@ -92,5 +96,13 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 extension DetailViewController: DetailViewControllerProtocol {
+    func success() {
+        self.launchCollectionView.reloadData()
+    }
     
+    func failure(error: Error) {
+        let alert = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
