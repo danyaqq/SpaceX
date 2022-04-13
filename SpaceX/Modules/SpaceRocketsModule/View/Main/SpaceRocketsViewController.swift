@@ -64,7 +64,6 @@ extension SpaceRocketsViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         view.frame = UIScreen.main.bounds
-        view.backgroundColor = .yellow
         view.addSubview(collectionView)
         view.addSubview(pageControlContainer)
         
@@ -110,9 +109,11 @@ extension SpaceRocketsViewController: UICollectionViewDelegate, UICollectionView
         }
         
         if let viewModel = presenter.getViewModel(index: indexPath.row) {
-        cell.configure(with: viewModel)
-        cell.configureCharacteristicsView(with: viewModel.characteristics)
-        cell.configureInfoView(firstStageViewModel: viewModel.firstStage, secondStageViewModel: viewModel.secondStage, launchItemsViewModel: viewModel.launchItems)
+            cell.titleText = viewModel.title
+            cell.rocketId = viewModel.id
+            cell.configure(with: viewModel)
+            cell.configureCharacteristicsView(with: viewModel.characteristics)
+            cell.configureInfoView(firstStageViewModel: viewModel.firstStage, secondStageViewModel: viewModel.secondStage, launchItemsViewModel: viewModel.launchItems)
         }
         
         cell.delegate = self
@@ -135,13 +136,15 @@ extension SpaceRocketsViewController: SpaceRocketsViewControllerProtocol {
 }
 
 extension SpaceRocketsViewController: SpaceRocketsViewCellDelegate {
+    
     func settingsButtonDidTap() {
         let settingsVC = AssemblyModuleBuilder.createSettingsModule()
         settingsVC.modalPresentationStyle = .formSheet
         navigationController?.present(settingsVC, animated: true, completion: nil)
     }
     
-    func showLaunchesButtonDidTap() {
-        print("Tap")
+    func showLaunchesButtonDidTap(with titleText: String?, rocketId: String?) {
+        let detailVC = AssemblyModuleBuilder.createDetailModule(with: titleText, rocketId: rocketId)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
